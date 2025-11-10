@@ -37,7 +37,7 @@ transport = float(input("Enter your transport "))
 food = float(input("Enter the amount you spend on food "))
 gifts = float(input("Enter the amount you spend on gift "))
 
-expense = total_income + food + gifts 
+expense = transport + food + gifts 
 balance = total_income - expense
 savings_ratio = ( balance / total_income) * 100
 
