@@ -18,5 +18,5 @@ age_months = age * 12
 age_days = age * 365
 
 print(f"\n AGE CALCULATOR FOR {name}")
-print(f"{age} in months is {age_months}")
-print(f"{age} in days is {age_days}")
+print(f"{age}years is {age_months} in months")
+print(f"{age}years is {age_days} in days")
