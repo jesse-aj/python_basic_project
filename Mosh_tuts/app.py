@@ -167,12 +167,4 @@
 #         print("*", end="")
 #     print()
 
-rows = 5
 
-while rows > 0:
-    to_be = 1
-    while to_be <= rows:
-        print("*")
-        to_be += 1
-    print()
-    rows = rows + 1
