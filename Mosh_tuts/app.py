@@ -55,7 +55,7 @@
 # print(course.lstrip())  # left trip
 # print(course.rstrip())  # right strip
 # print(course.find("pro"))  # index or sequence of a string (returns an index)
-# print(course.replace("p" "j"))  # To replace something
+# # To replace something
 # # check existense of character data or variable (returns a boolean)
 # print("pro" in course)
 # print("swift" not in course)  # opposite of in
@@ -89,20 +89,90 @@
 # print("Your grade is:", grade)
 
 
-high_income = True
-good_credit = True
-student = True
+# high_income = True
+# good_credit = True
+# student = True
 
-if (high_income or good_credit) and not student:
-    print("You are eligible for a loan")
-else:
-    print("Not Eligible")
+# if (high_income or good_credit) and not student:
+#     print("You are eligible for a loan")
+# else:
+#     print("Not Eligible")
 
 
-age = 45
-if 18 <= age < 65:
-    message = "You are grown ass man stop fooling around"
-else:
-    message = "Continue to fool"
+# age = 45
+# if 18 <= age < 65:
+#     message = "You are grown ass man stop fooling around"
+# else:
+#     message = "Continue to fool"
 
-print("You can and are", message)
+# print("You can and are", message)
+
+# house_addresses = ["Race Course", "Apremedo", "Kwesimintsin"]
+
+# address_found = False
+# while not address_found:
+#     address = input("Please Enter your home Address  (Enter q to quit) ")
+#     if address.lower() == "q":
+#         break
+#     if address in house_addresses:
+#         address_found = True
+#         print(f"{address} is found")
+#     else:
+#         print(f"{address} is not found")
+# counter = 1
+# while counter <= 5:
+#     print("Jesse", end="")
+#     s_count = 1
+#     while s_count <= 4:
+#         print("will make it", end="")
+#         s_count += 1
+
+#     counter = counter + 1
+#     print()
+
+
+# repe_count = 0
+# while repe_count < 4:
+#     number = 1
+#     while number <= 100:
+#         if number % 3 == 0 and number % 5 == 0:
+#             print(number, end=" ")
+#         number = number + 1
+
+#     print()
+
+#     repe_count = repe_count + 1
+
+# counter_count = 11
+
+# while counter_count > 0:
+#     inner_count = 1
+#     while inner_count <= counter_count:
+#         print(inner_count, end="")
+#         inner_count += 1
+#     print()
+#     counter_count -= 1
+
+
+# for i in range(1, 11):
+#     for j in range(1, 11):
+#         product = i * j
+#         print(f"{i} * {j} is {product}", end="\t")
+#     print()
+
+# rows = 5
+
+# for i in range(1, rows + 1):
+#     for j in range(1, i + 1):
+#         print("*", end="")
+#     print()
+
+rows = 5
+
+while rows > 0:
+    to_be = 1
+    while to_be <= rows:
+        print("*")
+        to_be += 1
+    print()
+    rows = rows + 1
