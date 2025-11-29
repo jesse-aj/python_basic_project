@@ -154,17 +154,17 @@
 #     counter_count -= 1
 
 
-# for i in range(1, 11):
-#     for j in range(1, 11):
-#         product = i * j
-#         print(f"{i} * {j} is {product}", end="\t")
-#     print()
+for i in range(1, 11):
+    for j in range(1, 11):
+        product = i * j
+        print(f"{i} * {j} is {product}", end="\t")
+    print()
 
-# rows = 5
+rows = 5
 
-# for i in range(1, rows + 1):
-#     for j in range(1, i + 1):
-#         print("*", end="")
-#     print()
+for i in range(1, rows + 1):
+    for j in range(1, i + 1):
+        print("*", end="")
+    print()
 
 
