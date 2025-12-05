@@ -7,4 +7,9 @@ print(type(score))  # prints the type od score
 print(score[3])  # prints values according to index
 
 score.append(102)
+
+
+score[2] = 6266  # to change a value in list
+# to insert? 
+score.insert = 3
 print(score)
