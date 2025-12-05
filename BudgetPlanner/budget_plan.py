@@ -25,94 +25,75 @@ PERSONAL BUDGET SUMMARY
 
 print("=== PERSONAL BUDGET PLANNER ===")
 
-# Step 1
-name = input("Please Enter your name  ")
 
-# step 2
-valid = False
-while not valid:
-    total_income = (input("Enter your monthly salary: GHS"))
-    if total_income.replace(".", "", 1).isdigit():
-        total_income = float(total_income)
-        valid = True
+def get_valid_number(prompt):
+    while True:
+        value = input(prompt)
+
+        if value.replace(".", "", 1).isdigit():
+            return float(value)
+        else:
+            print("Enter a valid number for monthly income")
+
+
+def get_user_details():
+    name = input("Please Enter your name ")
+    income = get_valid_number("Enter your monthly salary: GHS")
+    return name, income
+
+
+def get_expenses():
+    expense_categories = ["Transport", "Food", "Gifts", "Entertainment"]
+    expenses = {}
+
+    for category in expense_categories:
+        expenses[category] = get_valid_number(
+            f"Enter your {category} expense: GHS")
+    return expenses
+
+
+def calculate_budget(income, expenses):
+    expenses = sum(expenses.values())
+    balance = income - expenses
+    savings_ratio = (balance / income) * 100 if income > 0 else 0
+
+    return expenses, balance, savings_ratio
+
+
+def display_summary(name, income, expenses, balance, savings_ratio):
+    print(f"\n === PERSONAL BUDGET FOR {name.upper()} ===")
+    print(f"Your total monthly income is {income:.2f} GHS")
+    print(f"Your total monthly expense is {expenses:.2f} GHS")
+    print(f"Your total balance is {balance:.2f} GHS")
+    print(f"Your Savings ratio is {savings_ratio:.2f}%")
+
+    if savings_ratio < 10:
+        print("You are saving too low! Try reducing your expnses")
+    elif savings_ratio < 30:
+        print("You're saving fairly! Keep improving")
     else:
-        print("Enter a valid number for monthly income")
+        print("Great job! You are saving well")
 
 
-valid = False
-while not valid:
-    transport = input("Enter the amount you spend on transport: GHS")
-    if transport.replace(".", "", 1).isdigit():
-        transport = float(transport)
-        valid = True
-    else:
-        print("Please Enter a valid number for transport ")
-
-valid = False
-while not valid:
-    food = input("Enter the amount you spend on food: GHS")
-    if food.replace(".", "", 1).isdigit():
-        food = float(food)
-        valid = True
-    else:
-        print("Please enter a correct value for food")
-
-valid = False
-while not valid:
-    gifts = input("Enter the amount you spend on gift GHS")
-    if gifts.replace(".", "", 1).isdigit():
-        gifts = float(gifts)
-        valid = True
-    else:
-        print("Enter a correct value for gifts")
+def show_expense_breakdown(expenses):
+    choice = input(
+        "\n Would you like to see a breakdown of your expense? (yes/no)").strip().lower()
+    if choice == "yes":
+        total = sum(expenses.values())
+        print("\n Expense Breakdown: ")
+        for category, amount in expenses.items():
+            percent = (amount / total) * 100
+            print(f"{category}: ${amount:.2f}    ({percent:.2f}%)")
 
 
-valid = False
-while not valid:
-    entertainment = input("Enter the amount you spend on entertainment")
-    if entertainment.replace(".", "", 1).isdigit():
-        entertainment = float(entertainment)
-        valid = True
-    else:
-        print("Enter a valid number for entertainment")
-
-# step 3
-expense = transport + food + gifts + entertainment
-balance = total_income - expense
-if total_income > 0:
-    savings_ratio = (balance / total_income) * 100
-else:
-    savings_ratio = 0
-
-# step 4
-print(f"\n === PERSONAL BUDGET FOR {name.upper()} ===")
-print(f"Your total monthly income is {total_income:.2f} GHS")
-print(f"Your total monthly expense is {expense:.2f} GHS")
-print(f"Your total balance is {balance:.2f} GHS")
-print(f"Your Savings ratio is {savings_ratio:.2f}%")
-
-# step 5
-if savings_ratio < 10:
-    print("You are saving too low! Try reducing your expnses")
-elif savings_ratio < 30:
-    print("You're saving fairly! Keep improving")
-else:
-    print("Great job! You are saving well")
-
-# step 6
-choice = input(
-    "\n Would you like to see a breakdown of your expense? (yes/no)").strip().lower()
-if choice == "yes":
-    categories = ("transport", "food", "gifts", "entertainment")
-    values = [transport, food, gifts, entertainment]
-    total = expense
-
-    print("\n Expense Breakdown: ")
-    i = 0
-    while i < len(categories):
-        percent = (values[i] / total) * 100
-        print(f"{categories[i]} : GHS{values[i]:.2f} {percent:.2f}%")
-        i += 1
+def main():
+    name, income = get_user_details()
+    expense = get_expenses()
+    expenses, balance, savings_ratio = calculate_budget(
+        income, expense)
+    display_summary(name, income, expenses, balance, savings_ratio)
+    show_expense_breakdown(expense)
+    print("Thank you for using the personal budget tool")
 
 
-print("Thank you for using the personal budget tool")
+main()
