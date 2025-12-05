@@ -4,19 +4,24 @@
 #     return python_data_type
 
 
-# def sign_up(username, firstname, lastname, password):
-#     message = "Username should bot be less than 6 characters"
-
-#     if len(username) < 6:
-#         return message
-
-#     message = "Registration Successful"
-
-#     return message
+message = "hi"
 
 
-# results = sign_up("alxawdwd", "Jesse", "Appiah",
-#                   "ajstar")   # calling the function
+def sign_up(username, firstname, lastname, password):
+    message = "Username should bot be less than 6 characters"
+
+    if len(username) < 6:
+        return message
+
+    message = "Registration Successful"
+
+    return message
 
 
-# print(results)
+print(message)
+
+# calling the function
+results = print(sign_up("alxawdwd", "Jesse", "Appiah", "ajstar"))
+
+
+print(results)
