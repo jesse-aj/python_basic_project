@@ -40,4 +40,4 @@ class TestCalc(unittest.TestCase):
 
 
 if __name__ == "__main__":
-    unittest.main()
+    unittest.main(argv=[''],verbosity=2, exit=False)
