@@ -24,76 +24,96 @@ PERSONAL BUDGET SUMMARY
 
 
 print("=== PERSONAL BUDGET PLANNER ===")
+#eception customized error
+class InvalidInputError(Exception):
+    """Custom Exception from invalid input"""
+
+class BudgetCalculator:
+    def __init__(self):
+        self.name = ""
+        self.income = 0.0
+        self.expenses = {}
 
 
-def get_valid_number(prompt):
-    while True:
+    def get_valid_number(self, prompt):
+      try:
+       while True:
         value = input(prompt)
 
         if value.replace(".", "", 1).isdigit():
             return float(value)
         else:
-            print("Enter a valid number for monthly income")
+            raise InvalidInputError("Enter a valid input")  ##Another way to use cusomixed exceptions
+
+      except InvalidInputError as e:
+       print(e)
 
 
-def get_user_details():
-    name = input("Please Enter your name ")
-    income = get_valid_number("Enter your monthly salary: GHS")
-    return name, income
+    def get_user_details(self):
+       self.name = input("Please Enter your name ")
+       self.income = self.get_valid_number("Enter your monthly salary: GHS")
 
 
-def get_expenses():
-    expense_categories = ["Transport", "Food", "Gifts", "Entertainment"]
-    expenses = {}
 
-    for category in expense_categories:
-        expenses[category] = get_valid_number(
-            f"Enter your {category} expense: GHS")
-    return expenses
+    def get_expenses(self):
+        expense_categories = ["Transport", "Food", "Gifts", "Entertainment"]
+        print("\n --- Enter your Expense ----")
 
-
-def calculate_budget(income, expenses):
-    expenses = sum(expenses.values())
-    balance = income - expenses
-    savings_ratio = (balance / income) * 100 if income > 0 else 0
-
-    return expenses, balance, savings_ratio
+        for category in expense_categories:
+            try:
+                self.expenses[category] = self.get_valid_number(f"Enter your {category} expense: GHS")
+            except Exception:
+               print("Error Entering Expense, Please try again")
 
 
-def display_summary(name, income, expenses, balance, savings_ratio):
-    print(f"\n === PERSONAL BUDGET FOR {name.upper()} ===")
-    print(f"Your total monthly income is {income:.2f} GHS")
-    print(f"Your total monthly expense is {expenses:.2f} GHS")
-    print(f"Your total balance is {balance:.2f} GHS")
-    print(f"Your Savings ratio is {savings_ratio:.2f}%")
+    def calculate_budget(self):
+        expenses = sum(self.expenses.values())
+        balance = self.income - expenses
 
-    if savings_ratio < 10:
-        print("You are saving too low! Try reducing your expnses")
-    elif savings_ratio < 30:
-        print("You're saving fairly! Keep improving")
-    else:
-        print("Great job! You are saving well")
+        try:
+           savings_ratio = (balance / self.income) * 100 if self.income > 0 else 0
+        except ZeroDivisionError:
+           savings_ratio = 0  
+        return expenses, balance, savings_ratio
 
 
-def show_expense_breakdown(expenses):
-    choice = input(
-        "\n Would you like to see a breakdown of your expense? (yes/no)").strip().lower()
-    if choice == "yes":
-        total = sum(expenses.values())
-        print("\n Expense Breakdown: ")
-        for category, amount in expenses.items():
-            percent = (amount / total) * 100
-            print(f"{category}: ${amount:.2f}    ({percent:.2f}%)")
+    def display_summary(self, expenses, balance, savings_ratio):
+        print(f"\n === PERSONAL BUDGET FOR {self.name.upper()} ===")
+        print(f"Your total monthly income is {self.income:.2f} GHS")
+        print(f"Your total monthly expense is {expenses:.2f} GHS")
+        print(f"Your total balance is {balance:.2f} GHS")
+        print(f"Your Savings ratio is {savings_ratio:.2f}%")
+
+        if savings_ratio < 10:
+            print("You are saving too low! Try reducing your expnses")
+        elif savings_ratio < 30:
+            print("You're saving fairly! Keep improving")
+        else:
+          print("Great job! You are saving well")
+
+
+    def show_expense_breakdown(self):
+        choice = input(
+            "\n Would you like to see a breakdown of your expense? (yes/no)").strip().lower()
+        if choice == "yes":
+            total = sum(self.expenses.values())
+            print("\n Expense Breakdown: ")
+            for category, amount in self.expenses.items():
+                percent = (amount / total) * 100
+                print(f"{category}: ${amount:.2f}    ({percent:.2f}%)")
 
 
 def main():
-    name, income = get_user_details()
-    expense = get_expenses()
-    expenses, balance, savings_ratio = calculate_budget(
-        income, expense)
-    display_summary(name, income, expenses, balance, savings_ratio)
-    show_expense_breakdown(expense)
-    print("Thank you for using the personal budget tool")
+        calculator = BudgetCalculator()
+        calculator.get_user_details()
+        calculator.get_expenses()
+        expenses, balance, savings_ratio = calculator.calculate_budget()
+        calculator.display_summary(expenses, balance, savings_ratio)
+        calculator.show_expense_breakdown()
+        print("Thank you for using the personal budget tool")
 
 
-main()
+
+if __name__ == "__main__":
+   main()
+

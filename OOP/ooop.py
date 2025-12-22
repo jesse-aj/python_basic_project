@@ -15,6 +15,7 @@ class Dog:
       print(f"{self.name} is making barking")
 
 
+##The objects itself 
 
 scooby = Dog("scobby", 50)
 humble = Dog("humble", 30)
